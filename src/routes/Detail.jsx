@@ -5,6 +5,8 @@ import styles from "./Detail.module.css";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 function Detail() {
+    // react-router는 주소값이 변경되는걸 실시간 감시하고 있는 라이브러리이고,
+    // 그것에 파생된 useParams라는 메소드도 계속 감시 중임
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -21,7 +23,7 @@ function Detail() {
             .catch(error => {
                 console.log(error);
             });
-    }, []);
+    }, [id]);
 
     return (
         <div className={styles.container}>
@@ -65,7 +67,7 @@ function Detail() {
                                     {movie.vote_average}
                                 </span>
                             </div>
-                            <div className={styles.overview}>{movie.overview}</div>
+                            <div className={styles.overview}>{movie.overview || "등록된 줄거리가 없습니다."}</div>
                         </div>
                     </div>
                 )
